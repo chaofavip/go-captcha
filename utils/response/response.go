@@ -2,7 +2,6 @@ package response
 
 import (
 	"captchaCode/global/consts"
-	"captchaCode/global/my_errors"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -33,13 +32,6 @@ func Success(c *gin.Context, msg string, data interface{}) {
 // 失败的业务逻辑
 func Fail(c *gin.Context, dataCode int, msg string, data interface{}) {
 	ReturnJson(c, http.StatusBadRequest, dataCode, msg, data)
-	c.Abort()
-}
-
-//权限校验失败
-func ErrorAuthFail(c *gin.Context) {
-	ReturnJson(c, http.StatusUnauthorized, http.StatusUnauthorized, my_errors.ErrorsNoAuthorization, "")
-	//暂停执行
 	c.Abort()
 }
 
